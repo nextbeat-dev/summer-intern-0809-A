@@ -19,3 +19,6 @@ CREATE TABLE "udb_user_password" (
   "updated_at" TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   "created_at" TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
+
+
+INSERT INTO "udb_user" ("name_first", "name_last", "email") VALUES ('佐藤', '太郎', 'yukiyuki@gamail.com')

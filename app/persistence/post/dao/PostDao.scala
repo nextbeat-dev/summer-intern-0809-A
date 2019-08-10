@@ -43,21 +43,21 @@ class PostDAO @javax.inject.Inject()(
     db.run {
       slick
         .filter(_.id === id)
-        .result
+        .result.headOption
   }
 
   def getBySpotId(id: Spot.Id) =
     db.run {
       slick
         .filter(_.spotId === id)
-        .result
+        .result.headOption
     }
 
   def getByUserId(id: User.Id) =
     db.run {
       slick
         .filter(_.userId === id)
-        .result
+        .result.headOption
     }
 
   /**
@@ -85,7 +85,7 @@ class PostDAO @javax.inject.Inject()(
 
     // The * projection of the table
     def * = (
-      id.?, title, content, image, userId, spotId, updatedAt, createdAt
+      id.?, title, content, image.?, userId, spotId, updatedAt, createdAt
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
       (Post.apply _).tupled,

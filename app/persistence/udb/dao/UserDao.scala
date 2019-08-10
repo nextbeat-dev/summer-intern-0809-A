@@ -40,6 +40,13 @@ class UserDAO @javax.inject.Inject()(
       }
     }
 
+  def get(id: User.Id) =
+    db.run {
+      slick
+        .filter(_.id === id)
+        .result.headOption
+    }
+
   /**
     * ユーザを削除する
     */

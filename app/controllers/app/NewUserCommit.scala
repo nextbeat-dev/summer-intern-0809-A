@@ -11,10 +11,9 @@ import javax.inject.Inject
 import play.api.i18n.I18nSupport
 import play.api.mvc.{AbstractController, MessagesControllerComponents}
 import persistence.geo.dao.LocationDAO
-import persistence.udb.dao.UserDAO
+import persistence.udb.dao.{UserDAO, UserPasswordDAO}
 import persistence.geo.model.Location
-import persistence.udb.model.User.formForNewUser
-import model.site.app.SiteViewValueNewUser
+import model.site.app.{NewUserForm, SiteViewValueNewUser}
 import model.component.util.ViewValuePageLayout
 
 // 登録: 新規ユーザ
@@ -22,6 +21,7 @@ import model.component.util.ViewValuePageLayout
 class NewUserCommitController @Inject()(
   val daoLocation: LocationDAO,
   val userDAO: UserDAO,
+  val userPasswordDAO: UserPasswordDAO,
   cc: MessagesControllerComponents
 ) extends AbstractController(cc) with I18nSupport {
   implicit lazy val executionContext = defaultExecutionContext
@@ -30,7 +30,7 @@ class NewUserCommitController @Inject()(
    * 新規ユーザの登録
    */
   def application = Action.async { implicit request =>
-    formForNewUser.bindFromRequest.fold(
+    NewUserForm.formForNewUser.bindFromRequest.fold(
       errors => {
         for {
           locSeq <- daoLocation.filterByIds(Location.Region.IS_PREF_ALL)
@@ -44,10 +44,11 @@ class NewUserCommitController @Inject()(
       },
       user   => {
         for {
-          _ <- userDAO.add(user)
+          id <- userDAO.add(user.toUser)
+          _  <- userPasswordDAO.add(user.toUserPassword(id))
         } yield {
           // TODO: セッション追加処理
-          Redirect("/recruit/intership-for-summer-21")
+          Redirect("/facility/list")
         }
       }
     )

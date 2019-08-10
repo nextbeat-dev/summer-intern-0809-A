@@ -14,6 +14,7 @@ import persistence.udb.model.User
 import persistence.udb.model.UserPassword
 import play.api.data.Forms._
 import play.api.data._
+import com.github.t3hnar.bcrypt._
 
 // 登録: 新規ユーザー
 //~~~~~~~~~~~~~~~~~~~~~
@@ -25,7 +26,6 @@ case class SiteViewValueNewUser(
 // ユーザ情報
 //~~~~~~~~~~~~~
 case class NewUserForm(
-  id:        Option[User.Id],                    // ユーザID
   nameLast:  String,                             // 名前 (姓)
   nameFirst: String,                             // 名前 (名)
   email:     String,                             // メールアドレス(重複あり)
@@ -37,8 +37,8 @@ case class NewUserForm(
     User(None, nameLast, nameFirst, email)
   }
 
-  def toUserPassword = {
-    UserPassword(None, id.get, password)
+  def toUserPassword(id: User.Id) = {
+    UserPassword(Some(id), id, password.bcrypt)
   }
 }
 
@@ -57,9 +57,9 @@ object NewUserForm {
       "email"     -> email,
       "password"  -> nonEmptyText,
     )(Function.untupled(
-      t => NewUserForm(None, t._1, t._2, t._3, t._4)
+      t => NewUserForm(t._1, t._2, t._3, t._4)
     ))(NewUserForm.unapply(_).map(
-      t => (t._2, t._3, t._4, t._5)
+      t => (t._1, t._2, t._3, t._4)
     ))
   )
 }

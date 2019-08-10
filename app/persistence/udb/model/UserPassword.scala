@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 // ユーザ情報
 //~~~~~~~~~~~~~
 case class UserPassword(
-                 id:        Option[UserPassword.Id],
+                 id:        Option[User.Id],
                  user_id:   User.Id,
                  password:  String,
                  updatedAt: LocalDateTime = LocalDateTime.now,  // データ更新日
@@ -17,8 +17,5 @@ case class UserPassword(
 // コンパニオンオブジェクト
 //~~~~~~~~~~~~~~~~~~~~~~~~~~
 object UserPassword {
-
-  // --[ 管理ID ]---------------------------------------------------------------
-  type Id = Long
 
 }

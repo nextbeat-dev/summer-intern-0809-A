@@ -15,7 +15,7 @@ import persistence.spot.dao.SpotDAO
 import persistence.post.model.Post
 import persistence.post.model.Post.formForPostSearch
 import model.site.post.SiteViewValuePostShow
-import scala.concurrent._
+import model.site.post.SiteViewValueHome
 
 // 施設
 //~~~~~~~~~~~~~~~~~~~~~
@@ -30,23 +30,17 @@ class PostController @javax.inject.Inject()(
   def show(id: Post.Id) = Action.async { implicit request =>
     for {
       p <- postDAO.get(id)
-      s <- spotDAO.get(p.get.spot_id)
+      s <- spotDAO.get(p.get.spotId)
     } yield {
       val vv = SiteViewValuePostShow(
-        layout     = ViewValuePageLayout(id = request.uri),
-        post   = p.get,
+        layout = ViewValuePageLayout(id = request.uri),
+        post = p.get,
         spot = s.get
       )
       Ok(views.html.site.post.show.Main(vv))
     }
   }
 
-
-  def search = Action.async { implicit request =>
-    Future {
-      Ok(views.html.site.home.Main(ViewValuePageLayout(id = request.uri), formForPostSearch))
-    }
-  }
     /*
     formForPostSearch.bindFromRequest.fold(
       errors => {

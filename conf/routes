@@ -3,6 +3,7 @@
 # ~~~~
 
 GET /home/                             controllers.home.HomeController.view
+GET /home/                             controllers.home.HomeController.search
 
 # --[ 登録処理 ]----------------------------------------------------------------
 GET   /app/new-user                     controllers.app.NewUserController.viewForApp
@@ -12,7 +13,6 @@ POST  /login                            controllers.app.AuthController.loginComm
 
 # --[ Post ]---------------------------------------------------------------------
 GET /post/:id                          controllers.post.PostController.show(id: Long)
-GET /post/search                       controllers.post.PostController.search
 
 # --[ 施設ページ ]----------------------------------------------------------------
 GET  /facility/list                    controllers.facility.FacilityController.list

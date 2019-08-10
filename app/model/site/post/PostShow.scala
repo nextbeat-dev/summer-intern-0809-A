@@ -10,6 +10,7 @@ package model.site.post
 import model.component.util.ViewValuePageLayout
 import persistence.post.model.Post
 import persistence.spot.model.Spot
+import play.api.libs.json._
 
 // 表示: 施設一覧
 //~~~~~~~~~~~~~~~~~~~~~
@@ -18,3 +19,18 @@ case class SiteViewValuePostShow(
   post: Post,
   spot: Spot
 )
+
+case class SiteViewValueHome
+(
+  layout: ViewValuePageLayout,
+  jsonStr: String
+)
+
+case class PostSpot(title: String, content: String, latitude: Double, longitude: Double)
+object PostSpot {
+  implicit val jsonWrites = Json.writes[PostSpot]
+
+  def apply(spot: Spot, post: Post):PostSpot ={
+    PostSpot(post.title, post.content, spot.latitude, spot.longitude)
+  }
+}

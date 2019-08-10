@@ -37,13 +37,18 @@ class SpotDAO @javax.inject.Inject()(
     * spotを取得する
     */
 
-  def get(id: Spot.Id) =
+  def get(id: Spot.Id) = {
     db.run {
       slick
         .filter(_.id === id)
         .result.headOption
     }
+  }
 
+  def filterByIds(ids: Seq[Spot.Id]) =
+    db.run{
+      slick.filter(_.id inSet(ids)).result
+    }
 
   /**
     * spotを削除する

@@ -20,8 +20,8 @@ case class Post(
                  title:     String,                             // 投稿タイトル
                  content:   String,                             // 投稿内容
                  image:     Option[String],                             // 画像をbase64でエンコード
-                 spot_id:   Spot.Id,                            // Spot.id
-                 user_id:   User.Id,                            // 投稿したユーザーのid
+                 userId:    User.Id,                            // 投稿したユーザーのid
+                 spotId:    Spot.Id,                            // Spot.id
                  updatedAt: LocalDateTime = LocalDateTime.now,  // データ更新日
                  createdAt: LocalDateTime = LocalDateTime.now   // データ作成日
                )

@@ -4,7 +4,8 @@ import play.api.i18n.I18nSupport
 import play.api.mvc.{AbstractController, MessagesControllerComponents}
 import persistence.udb.dao.UserDAO
 import persistence.post.dao.PostDAO
-import persistence.udb.model.User
+// ユーザー認証のやつ
+import mvc.action.AuthenticationAction
 import model.component.util.ViewValuePageLayout
 import model.site.mypage.SiteViewValueUserShow
 
@@ -21,16 +22,18 @@ class MypageController @javax.inject.Inject()(
   /**
     * mypage
     */
+  // def show = (Action andThen AuthenticationAction()).async { implicit request =>
   def show() = Action.async { implicit request =>
 
     for {
-      user     <- userDao.get(1)
-      postSeq  <- postDao.getByUserId(1)
+      // user <- request.user
+      Some(user) <- userDao.get(1)
+      postSeq    <- postDao.getByUserId(user.id.get)
     } yield {
 
       val vv = SiteViewValueUserShow(
         layout = ViewValuePageLayout(id = request.uri),
-        user   = user.get,
+        user   = user,
         posts  = postSeq
       )
 

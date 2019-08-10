@@ -48,7 +48,7 @@ class NewUserCommitController @Inject()(
           _  <- userPasswordDAO.add(user.toUserPassword(id))
         } yield {
           // TODO: セッション追加処理
-          Redirect("/facility/list")
+          Redirect("/home/")
         }
       }
     )

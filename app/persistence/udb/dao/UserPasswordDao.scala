@@ -21,6 +21,13 @@ class UserPasswordDAO @javax.inject.Inject()(
   // --[ リソース定義 ] --------------------------------------------------------
   lazy val slick = TableQuery[UserPasswordTable]
 
+  def get(id: User.Id) =
+    db.run {
+      slick
+        .filter(_.id === id)
+        .result.headOption
+    }
+
   // --[ データ処理定義 ] ------------------------------------------------------
   /**
     * ユーザのpasswordを追加する

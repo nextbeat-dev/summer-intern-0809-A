@@ -1,0 +1,134 @@
+@*
+ * This file is part of the Nextbeat services.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ *@
+@import views.html.helper
+@import model.component.util.ViewValuePageLayout
+@import play.api.data.Form
+
+@(vv: ViewValuePageLayout)(implicit messages: play.api.i18n.Messages)
+
+@** 施設検索一覧 *@
+@views.html.common.layout.InnerContent("site-app-home", "content") {
+@** --[ 検索フォーム ]---------------------------------------------------------- *@
+<div class="content__section form">
+ @helper.form(action = controllers.facility.routes.FacilityController.search) {
+
+
+ @** 作品名 *@
+ <div class="form__section pref inline">
+  @*
+  @helper.select(
+  field   = form("locationId"),
+  options = vv.location.map(v => (v.id, v.namePref)),
+  '_label           -> "都道府県",
+  '_default         -> "未選択",
+  '_showConstraints -> false
+  )
+  *@
+ </div>
+
+ @** 登録ボタン *@
+ <div class="form__section submit inline">
+  <button class="button" type="submit">
+   <span class="submit__text">検索</span>
+  </button>
+ </div>
+ }
+</div>
+
+@** マップ *@
+<div id="wrapper">
+ <div id="map"></div>
+</div>
+
+
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyDyJExnzV4eE4GR1cvThMiJVPOWJrLwPG0&language=ja"></script>
+<script>
+
+var map;
+var marker = [];
+var infoWindow = [];
+var markerData = [ // マーカーを立てる場所名・緯度・経度
+  {
+       title: '天気の子',
+       content: '高円寺氷川神社',
+       lat: 35.704704,
+        lng: 139.651242,
+ }, {
+       title: '天気の子',
+       content: 'のぞき坂',
+       lat: 35.718109,
+        lng: 139.71377
+ }, {
+       title: '天気の子',
+       content: '代々木会館',
+       lat: 35.683309,
+        lng: 139.699422
+ }, {
+       title: '天気の子',
+       content: '朝日稲荷神社',
+       lat: 35.671824,
+       lng: 139.76721
+ }
+];
+
+var geocoder = new google.maps.Geocoder();//Geocode APIを使います。
+
+function initMap() {
+ // 地図の作成
+    var mapLatLng = new google.maps.LatLng({lat: markerData[0]['lat'], lng: markerData[0]['lng']}); // 緯度経度のデータ作成
+   map = new google.maps.Map(document.getElementById('map'), { // #sampleに地図を埋め込む
+     center: mapLatLng, // 地図の中心を指定
+      zoom: 15 // 地図のズームを指定
+   });
+
+ // マーカー毎の処理
+ for (var i = 0; i < markerData.length; i++) {
+        markerLatLng = new google.maps.LatLng({lat: markerData[i]['lat'], lng: markerData[i]['lng']}); // 緯度経度のデータ作成
+        marker[i] = new google.maps.Marker({ // マーカーの追加
+         position: markerLatLng, // マーカーを立てる位置を指定
+            map: map // マーカーを立てる地図を指定
+       });
+
+     infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
+     // 吹き出しに表示する内容
+         content:
+         '<div class="inner_window_wrapper">' +
+            '<div class="left">' +
+               '<a href="#" style="display: inline-block;">' +
+               '<div class="sample">' + markerData[i]['title'] + '</div>' +
+                  '<div>' + markerData[i]['content'] + '</div>' +
+               '</a>' +
+            '</div>' +
+            '<div class="right">' +
+               '<img src="assets">' +
+            '</div>' +
+
+         '</div>'
+
+       });
+
+     markerEvent(i); // マーカーにクリックイベントを追加
+ }
+}
+
+// マーカーにクリックイベントを追加
+function markerEvent(i) {
+    marker[i].addListener('click', function() { // マーカーをクリックしたとき
+      for (var j = 0; j < markerData.length; j++) {
+         if( j != i){
+            infoWindow[j].close();
+         }
+      }
+      infoWindow[i].open(map, marker[i]); // 吹き出しの表示
+  });
+}
+
+initMap();
+
+</script>
+
+}

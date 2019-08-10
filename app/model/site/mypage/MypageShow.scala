@@ -5,18 +5,16 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
-package model.site.post
+package model.site.mypage
 
 import model.component.util.ViewValuePageLayout
+import persistence.udb.model.User
 import persistence.post.model.Post
-import persistence.spot.model.Spot
-import persistence.post.model.PostComment
 
 // 表示: 施設一覧
 //~~~~~~~~~~~~~~~~~~~~~
-case class SiteViewValuePostShow(
-  layout:   ViewValuePageLayout,
-  post: Post,
-  spot: Spot,
-  comments: Seq[PostComment]
+case class SiteViewValueUserShow(
+   layout:  ViewValuePageLayout,
+   user:    User,
+   posts:   Seq[Post]
 )

@@ -9,6 +9,7 @@ import play.api.db.slick.HasDatabaseConfigProvider
 
 import persistence.post.model.Post
 import persistence.udb.model.User
+import persistence.spot.model.Spot
 
 // DAO: ユーザ情報
 //~~~~~~~~~~~~~~~~~~
@@ -45,7 +46,7 @@ class PostDAO @javax.inject.Inject()(
         .result
   }
 
-  def getBySpotId(id: Long) =
+  def getBySpotId(id: Spot.Id) =
     db.run {
       slick
         .filter(_.spotId === id)
@@ -78,7 +79,7 @@ class PostDAO @javax.inject.Inject()(
     /* @3 */ def content   = column[String]        ("content")           // post content
     /* @4 */ def image     = column[String]        ("image")             // base64でエンコードしたimage
     /* @5 */ def userId    = column[User.Id]       ("user_id")           // 投稿したユーザーのid
-    /* @6 */ def spotId    = column[Long]          ("spot_id")           // 紐づいているspotのID
+    /* @6 */ def spotId    = column[Spot.Id]       ("spot_id")           // 紐づいているspotのID
     /* @7 */ def updatedAt = column[LocalDateTime] ("updated_at")        // データ更新日
     /* @8 */ def createdAt = column[LocalDateTime] ("created_at")        // データ作成日
 

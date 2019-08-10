@@ -11,6 +11,7 @@ import play.api.data._
 import play.api.data.Forms._
 import java.time.LocalDateTime
 import persistence.udb.model.User
+import persistence.spot.model.Spot
 
 // post情報
 //~~~~~~~~~~~~~
@@ -19,7 +20,7 @@ case class Post(
                  title:     String,                             // 投稿タイトル
                  content:   String,                             // 投稿内容
                  image:     String,                             // 画像をbase64でエンコード
-                 spot_id:   Long,                               // Spot.id
+                 spot_id:   Spot.Id,                            // Spot.id
                  user_id:   User.Id,                            // 投稿したユーザーのid
                  updatedAt: LocalDateTime = LocalDateTime.now,  // データ更新日
                  createdAt: LocalDateTime = LocalDateTime.now   // データ作成日
@@ -33,7 +34,7 @@ object Post {
   type Id = Long
 
   // --[ フォーム定義 ]---------------------------------------------------------
-  val formForNewUser = Form(
+  val formForNewPost = Form(
     mapping(
       "title"     -> nonEmptyText,
       "content"   -> nonEmptyText,

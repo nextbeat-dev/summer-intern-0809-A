@@ -8,6 +8,9 @@ GET /home/                              controllers.home.HomeController.view
 GET   /app/new-user                     controllers.app.NewUserController.viewForApp
 POST  /app/new-user                     controllers.app.NewUserCommitController.application
 
+# --[ Post ]---------------------------------------------------------------------
+#GET /post/:id                          controllers.post.PostController.show(id: Long)
+
 # --[ 施設ページ ]----------------------------------------------------------------
 GET  /facility/list                    controllers.facility.FacilityController.list
 GET  /facility/search                  controllers.facility.FacilityController.search

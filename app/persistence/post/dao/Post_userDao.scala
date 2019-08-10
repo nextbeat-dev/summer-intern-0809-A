@@ -7,25 +7,25 @@ import slick.jdbc.JdbcProfile
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
 
-import persistence.post.model.Post_user
+import persistence.post.model.PostUser
 import persistence.udb.model.User
 import persistence.post.model.Post
 
 // DAO: ユーザ情報
 //~~~~~~~~~~~~~~~~~~
-class Post_UserDAO @javax.inject.Inject()(
+class PostUserDAO @javax.inject.Inject()(
                                       val dbConfigProvider: DatabaseConfigProvider
                                     ) extends HasDatabaseConfigProvider[JdbcProfile] {
   import profile.api._
 
   // --[ リソース定義 ] --------------------------------------------------------
-  lazy val slick = TableQuery[Post_UserTable]
+  lazy val slick = TableQuery[PostUserTable]
 
   // --[ データ処理定義 ] ------------------------------------------------------
   /**
     * Post_user情報を追加する
     */
-  def add(data: Post_user) =
+  def add(data: PostUser) =
     db.run {
       data.id match {
         case None    => slick returning slick.map(_.id) += data
@@ -39,7 +39,7 @@ class Post_UserDAO @javax.inject.Inject()(
     * post_userを取得する
     */
 
-  def get(id: Post_user.Id) =
+  def get(id: PostUser.Id) =
     db.run {
       slick
         .filter(_.id === id)
@@ -70,7 +70,7 @@ class Post_UserDAO @javax.inject.Inject()(
   /**
     * 関係性を削除する
     */
-  def delete(id: Post_user.Id) =
+  def delete(id: PostUser.Id) =
     db.run {
       slick
         .filter(_.id === id)
@@ -78,10 +78,10 @@ class Post_UserDAO @javax.inject.Inject()(
     }
 
   // --[ テーブル定義 ] --------------------------------------------------------
-  class Post_UserTable(tag: Tag) extends Table[Post_user](tag, "post_user") {
+  class PostUserTable(tag: Tag) extends Table[PostUser](tag, "post_user") {
 
     // Table's columns
-    /* @1 */ def id        = column[Post_user.Id]  ("id", O.PrimaryKey, O.AutoInc)
+    /* @1 */ def id        = column[PostUser.Id]  ("id", O.PrimaryKey, O.AutoInc)
     /* @2 */ def userId    = column[User.Id]       ("user_id")           // user id
     /* @3 */ def postId    = column[Post.Id]       ("post_id")           // post id
     /* @4 */ def updatedAt = column[LocalDateTime] ("updated_at")        // データ更新日
@@ -92,9 +92,9 @@ class Post_UserDAO @javax.inject.Inject()(
       id.?, userId, postId, updatedAt, createdAt
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
-      (Post_user.apply _).tupled,
+      (PostUser.apply _).tupled,
       /** The bidirectional mappings : Model => Tuple(table) */
-      (v: TableElementType) => Post_user.unapply(v).map(_.copy(
+      (v: TableElementType) => PostUser.unapply(v).map(_.copy(
         _4 = LocalDateTime.now
       ))
     )

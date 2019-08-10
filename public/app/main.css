@@ -394,17 +394,17 @@ h1, h2, h3, h4, h5, h6 {
     width: 80px;
     height: 30px; }
 
-#wrapper {
+#site-app-home #wrapper {
     position: relative;
     width: 80%;
     margin: auto;
 }
-#wrapper:before {
+#site-app-home #wrapper:before {
     content:"";
     display: block;
     padding-top: 75%; /* 高さを幅の75%に固定 */
 }
-#wrapper #map {
+#site-app-home #wrapper #map {
     position: absolute;
     top: 0;
     left: 0;
@@ -436,6 +436,39 @@ h1, h2, h3, h4, h5, h6 {
 
 .inner_window_wrapper .right p{
     position: absolute;
+}
+
+#site-app-post-show .photo{
+  max-width: 50%;
+  background-color: #eee8aa;
+  margin: 0 auto;}
+
+#site-app-post-show .photo{
+text-align: center;}
+
+#site-app-post-show .detail{
+text-align: center;
+margin: auto;}
+
+#site-app-post-show .content__section .inline{
+display: inline-block;}
+
+#site-app-post-show #wrapper {
+    position: relative;
+    width: 40%;
+    margin: auto;
+}
+#site-app-post-show #wrapper:before {
+    content:"";
+    display: block;
+    padding-top: 75%; /* 高さを幅の75%に固定 */
+}
+#site-app-post-show #wrapper #map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
 #site-app-new-user-form.content {

@@ -39,7 +39,7 @@ class PostDAO @javax.inject.Inject()(
     * postを取得する
     */
 
-  def get(id: Post.Id) =
+  def get(id: Post.Id): Future[Option[Post]] =
     db.run {
       slick
         .filter(_.id === id)

@@ -7,10 +7,11 @@
 
 @import model.site.app.SiteViewValueNewUser
 @import persistence.udb.model.User
+@import model.site.app.NewUserForm
 @import play.api.data.Form
 
 @** ユーザー登録フォーム *@
-@(vv: SiteViewValueNewUser, form: Form[User])(implicit messages: play.api.i18n.Messages)
+@(vv: SiteViewValueNewUser, form: Form[NewUserForm])(implicit messages: play.api.i18n.Messages)
 @views.html.common.layout.Default(vv.layout) {
   @views.html.common.layout.ContentLayout(
     id      = "site-app-new-user",

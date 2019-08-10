@@ -27,20 +27,20 @@ case class User(
 //~~~~~~~~~~~~~~~~~~~~~~~~~~
 object User {
 
-  // --[ 管理ID ]---------------------------------------------------------------
+//  // --[ 管理ID ]---------------------------------------------------------------
   type Id = Long
-
-  // --[ フォーム定義 ]---------------------------------------------------------
-  val formForNewUser = Form(
-    mapping(
-      "nameLast"  -> nonEmptyText,
-      "nameFirst" -> nonEmptyText,
-      "email"     -> email,
-    )(Function.untupled(
-      t => User(None, t._1, t._2, t._3)
-    ))(User.unapply(_).map(
-      t => (t._2, t._3, t._4)
-    ))
-  )
+//
+//  // --[ フォーム定義 ]---------------------------------------------------------
+//  val formForNewUser = Form(
+//    mapping(
+//      "nameLast"  -> nonEmptyText,
+//      "nameFirst" -> nonEmptyText,
+//      "email"     -> email,
+//    )(Function.untupled(
+//      t => User(None, t._1, t._2, t._3)
+//    ))(User.unapply(_).map(
+//      t => (t._2, t._3, t._4)
+//    ))
+//  )
 }
 

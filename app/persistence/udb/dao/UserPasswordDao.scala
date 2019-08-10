@@ -28,9 +28,9 @@ class UserPasswordDAO @javax.inject.Inject()(
   def add(data: UserPassword) =
     db.run {
       data.id match {
-        case None    => slick returning slick.map(_.id) += data
-        case Some(_) => DBIO.failed(
-          new IllegalArgumentException("The given object is already assigned id.")
+        case Some(_) => slick += data
+        case None    => DBIO.failed(
+          new IllegalArgumentException("The given object is not assigned id.")
         )
       }
     }
@@ -49,7 +49,7 @@ class UserPasswordDAO @javax.inject.Inject()(
   class UserPasswordTable(tag: Tag) extends Table[UserPassword](tag, "udb_user_password") {
 
     // Table's columns
-    /* @1 */ def id        = column[User.Id]       ("id", O.PrimaryKey, O.AutoInc)  //ここいらんかもだけど一応
+    /* @1 */ def id        = column[User.Id]       ("id", O.PrimaryKey)  //ここいらんかもだけど一応
     /* @2 */ def user_id   = column[User.Id]       ("user_id")          // passwordと結びついているユーザーのid
     /* @3 */ def password  = column[String]        ("password")         // password hash下させて保存
     /* @4 */ def updatedAt = column[LocalDateTime] ("updated_at")       // データ更新日

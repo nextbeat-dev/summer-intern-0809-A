@@ -11,7 +11,7 @@ case class PostComment(
                  id:        Option[PostComment.Id],            // postId
                  content:   String,                             // 投稿内容
                  postId:    Post.Id,                            // Spot.id
-                 userId:    User.Id,                            // 投稿したユーザーのid
+                 userId:    Option[User.Id],                    // 投稿したユーザーのid
                  updatedAt: LocalDateTime = LocalDateTime.now,  // データ更新日
                  createdAt: LocalDateTime = LocalDateTime.now   // データ作成日
                )
@@ -28,7 +28,7 @@ object PostComment {
     mapping(
       "content"   -> nonEmptyText,
       "postId"    -> longNumber,
-      "userId"    -> longNumber,
+      "userId"    -> optional(longNumber),
     )(Function.untupled(
       t => PostComment(None, t._1, t._2, t._3)
     ))(PostComment.unapply(_).map(

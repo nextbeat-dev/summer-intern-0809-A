@@ -83,7 +83,7 @@ class PostCommentDAO @javax.inject.Inject()(
 
     // The * projection of the table
     def * = (
-      id.?, content, postId, userId, updatedAt, createdAt
+      id.?, content, postId, userId.?, updatedAt, createdAt
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
       (PostComment.apply _).tupled,

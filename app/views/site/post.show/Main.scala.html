@@ -6,10 +6,11 @@
 *@
 @import model.site.post.SiteViewValuePostShow
 @import play.api.data.Form
+@import persistence.post.model.PostComment
 
 @** 施設一覧/検索 *@
 @import persistence.facility.model.FacilitySearch
-@(vv: SiteViewValuePostShow)(implicit messages: play.api.i18n.Messages)
+@(vv: SiteViewValuePostShow, form: Form[PostComment])(implicit messages: play.api.i18n.Messages)
 @views.html.common.layout.Default(vv.layout) {
 @views.html.common.layout.ContentLayout(
 id      = "site-post-show",
@@ -19,5 +20,5 @@ content = tplContent
 
 @** テンプレート: コンテンツ *@
 @tplContent = {
-@views.html.site.post.show._Show(vv)
+@views.html.site.post.show._Show(vv, form)
 }

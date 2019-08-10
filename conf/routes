@@ -1,12 +1,12 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
+# --[ホーム]
+GET /home/                              controllers.home.HomeController.view
 
 # --[ 登録処理 ]----------------------------------------------------------------
 GET   /app/new-user                     controllers.app.NewUserController.viewForApp
 POST  /app/new-user                     controllers.app.NewUserCommitController.application
-
-
 
 # --[ 施設ページ ]----------------------------------------------------------------
 GET  /facility/list                    controllers.facility.FacilityController.list

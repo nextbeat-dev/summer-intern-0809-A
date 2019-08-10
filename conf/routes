@@ -9,7 +9,7 @@ GET   /app/new-user                     controllers.app.NewUserController.viewFo
 POST  /app/new-user                     controllers.app.NewUserCommitController.application
 
 # --[ Post ]---------------------------------------------------------------------
-#GET /post/:id                          controllers.post.PostController.show(id: Long)
+GET /post/:id                          controllers.post.PostController.show(id: Long)
 
 # --[ 施設ページ ]----------------------------------------------------------------
 GET  /facility/list                    controllers.facility.FacilityController.list

@@ -41,7 +41,7 @@ class SpotDAO @javax.inject.Inject()(
     db.run {
       slick
         .filter(_.id === id)
-        .result
+        .result.headOption
     }
 
 

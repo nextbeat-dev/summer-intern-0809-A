@@ -19,7 +19,7 @@ case class Post(
                  id:        Option[Post.Id],                    // postId
                  title:     String,                             // 投稿タイトル
                  content:   String,                             // 投稿内容
-                 image:     String,                             // 画像をbase64でエンコード
+                 image:     Option[String],                             // 画像をbase64でエンコード
                  spot_id:   Spot.Id,                            // Spot.id
                  user_id:   User.Id,                            // 投稿したユーザーのid
                  updatedAt: LocalDateTime = LocalDateTime.now,  // データ更新日
@@ -38,7 +38,7 @@ object Post {
     mapping(
       "title"     -> nonEmptyText,
       "content"   -> nonEmptyText,
-      "image"     -> text,
+      "image"     -> optional(text),
       "spotId"    -> longNumber,
       "userId"    -> longNumber,
     )(Function.untupled(

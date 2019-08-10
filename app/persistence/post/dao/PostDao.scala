@@ -39,11 +39,11 @@ class PostDAO @javax.inject.Inject()(
     * postを取得する
     */
 
-  def get(id: Post.Id) =
+  def get(id: Post.Id): Future[Option[Post]] =
     db.run {
       slick
         .filter(_.id === id)
-        .result
+        .result.headOption
   }
 
   def getBySpotId(id: Spot.Id) =
@@ -85,7 +85,7 @@ class PostDAO @javax.inject.Inject()(
 
     // The * projection of the table
     def * = (
-      id.?, title, content, image, userId, spotId, updatedAt, createdAt
+      id.?, title, content, image.?, userId, spotId, updatedAt, createdAt
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
       (Post.apply _).tupled,

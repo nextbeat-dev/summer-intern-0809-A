@@ -47,6 +47,13 @@ class UserDAO @javax.inject.Inject()(
         .result.headOption
     }
 
+  def findByEmail(email: String) =
+    db.run {
+      slick
+        .filter(_.email === email)
+        .result.headOption
+    }
+
   /**
     * ユーザを削除する
     */

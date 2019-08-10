@@ -50,14 +50,14 @@ class PostDAO @javax.inject.Inject()(
     db.run {
       slick
         .filter(_.spotId === id)
-        .result
+        .result.headOption
     }
 
   def getByUserId(id: User.Id) =
     db.run {
       slick
         .filter(_.userId === id)
-        .result
+        .result.headOption
     }
 
   /**

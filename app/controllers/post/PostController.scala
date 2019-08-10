@@ -37,11 +37,13 @@ class PostController @javax.inject.Inject()(
     for {
       p <- postDAO.get(id)
       s <- spotDAO.get(p.get.spot_id)
+      comment <- postCommentDao.getFilterByPostId(id)
     } yield {
       val vv = SiteViewValuePostShow(
         layout = ViewValuePageLayout(id = request.uri),
         post   = p.get,
-        spot   = s.get
+        spot   = s.get,
+        comments = comment
       )
       Ok(views.html.site.post.show.Main(vv, formForNewPostComment))
     }

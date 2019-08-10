@@ -43,7 +43,27 @@ classes = "photo__image")
  </div>
 
 <div style="text-align:center;">
+ <h1 style="font-size: 40px;">寄せられたコメント(@vv.comments.length)</h1>
+ <div class="content__section content">
 
+  @for(comment <- vv.comments) {
+  <article class="comment-list-item">
+   <a href="#">
+    <div class="item-panel__wrapper">
+     <header class="comment-item__header">
+      <div class="name" style="text-align: left;">
+       @comment.content
+      </div>
+     </header>
+    </div>
+   </a>
+  </article>
+  }
+
+ </div>
+</div>
+
+<div style="text-align:center;">
  @helper.form(action = controllers.post.routes.PostController.create(vv.post.id.get)){
 
   <div class="form__section">
@@ -60,7 +80,6 @@ classes = "photo__image")
     <span class="submit__text">コメント登録</span>
    </button>
   </div>
-
 
  }
 </div>

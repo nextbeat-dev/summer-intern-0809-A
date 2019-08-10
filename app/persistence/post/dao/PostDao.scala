@@ -35,6 +35,31 @@ class PostDAO @javax.inject.Inject()(
     }
 
   /**
+    * postを取得する
+    */
+
+  def get(id: Post.Id) =
+    db.run {
+      slick
+        .filter(_.id === id)
+        .result
+  }
+
+  def getBySpotId(id: Long) =
+    db.run {
+      slick
+        .filter(_.spotId === id)
+        .result
+    }
+
+  def getByUserId(id: User.Id) =
+    db.run {
+      slick
+        .filter(_.userId === id)
+        .result
+    }
+
+  /**
     * postを削除する
     */
   def delete(id: Post.Id) =

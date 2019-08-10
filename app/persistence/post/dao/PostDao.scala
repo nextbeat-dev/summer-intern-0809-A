@@ -57,7 +57,7 @@ class PostDAO @javax.inject.Inject()(
     db.run {
       slick
         .filter(_.userId === id)
-        .result.headOption
+        .result
     }
 
   /**

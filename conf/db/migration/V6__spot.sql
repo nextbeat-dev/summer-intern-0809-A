@@ -11,4 +11,4 @@ CREATE TABLE "spot" (
   "created_at"  timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
-INSERT INTO "spot" ("address", "longitude", "latitude") VALUES ('宮城県石巻市', null, 141.361477, 38.415452)
+INSERT INTO "spot" ("address", "longitude", "latitude") VALUES ('宮城県石巻市', 141.361477, 38.415452)

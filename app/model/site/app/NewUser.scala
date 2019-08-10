@@ -25,7 +25,8 @@ case class SiteViewValueNewUser(
 
 // ユーザ情報
 //~~~~~~~~~~~~~
-case class NewUserForm(
+case class NewUserForm
+(
   nameLast:  String,                             // 名前 (姓)
   nameFirst: String,                             // 名前 (名)
   email:     String,                             // メールアドレス(重複あり)

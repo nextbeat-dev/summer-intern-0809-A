@@ -8,13 +8,17 @@
 package controllers.post
 
 import model.component.util.ViewValuePageLayout
+import model.site.app.{NewUserForm, SiteViewValueNewUser}
 import play.api.i18n.I18nSupport
 import play.api.mvc.{AbstractController, MessagesControllerComponents}
+
 import scala.concurrent._
 import persistence.post.dao.PostDAO
 import persistence.spot.dao.SpotDAO
 import persistence.post.model.Post
 import model.site.post.SiteViewValuePostShow
+import persistence.geo.model.Location
+
 
 // 施設
 //~~~~~~~~~~~~~~~~~~~~~

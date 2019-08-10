@@ -6,9 +6,10 @@
  *@
 @import play.api.data.Form
 @import model.component.util.ViewValuePageLayout
+@import persistence.post.model.PostSearch
 
 @** 施設一覧/検索 *@
-@(vv: ViewValuePageLayout)(implicit messages: play.api.i18n.Messages)
+@(vv: ViewValuePageLayout, form: Form[PostSearch])(implicit messages: play.api.i18n.Messages)
 @views.html.common.layout.Default(vv) {
   @views.html.common.layout.ContentLayout(
     id      = "site-home",
@@ -18,5 +19,5 @@
 
 @** テンプレート: コンテンツ *@
 @tplContent = {
-  @views.html.site.home._Home(vv)
+  @views.html.site.home._Home(vv, form)
 }

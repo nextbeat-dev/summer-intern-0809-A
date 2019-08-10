@@ -26,6 +26,11 @@ case class Post(
                  createdAt: LocalDateTime = LocalDateTime.now   // データ作成日
                )
 
+// 施設検索
+case class PostSearch(
+                       query: Option[String]
+                     )
+
 // コンパニオンオブジェクト
 //~~~~~~~~~~~~~~~~~~~~~~~~~~
 object Post {
@@ -46,6 +51,12 @@ object Post {
     ))(Post.unapply(_).map(
       t => (t._2, t._3, t._4, t._5, t._6)
     ))
+  )
+
+  val formForPostSearch = Form(
+  mapping(
+    "locationId" -> optional(text),
+  )(PostSearch.apply)(PostSearch.unapply)
   )
 }
 

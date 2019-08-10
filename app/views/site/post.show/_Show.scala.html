@@ -15,36 +15,39 @@
 @** 施設検索一覧 *@
 @views.html.common.layout.InnerContent("site-app-post-show", "content") {
 @** --[ 見出し ]---------------------------------------------------------- *@
-<div class="content__section top photo">
-@views.html.common.component.image.ResponsiveImage(
-path    = "site/recruit/internship_for_summer_21/03_mentor-kawai.png",
-alt     = "エンジニア 川井 淳矢",
-classes = "photo__image")
+
+<div class="content__column">
+   <div class="content__section photo">
+   @views.html.common.component.image.ResponsiveImage(
+   path    = "site/recruit/internship_for_summer_21/03_mentor-kawai.png",
+   alt     = "エンジニア 川井 淳矢",
+   classes = "photo__image")
+   </div>
+
+   <div class="content__section detail">
+    <div class="title">
+     <label class="inline">作品名：</label>
+     <p class="inline">@vv.post.title</p>
+    </div>
+    <div class="content">
+     <label class="inline">説明：</label>
+     <p class="inline">@vv.post.content</p>
+    </div>
+    <div class="address">
+     <label class="inline">住所：</label>
+     <p class="inline">@vv.spot.address</p>
+    </div>
+   </div>
+
+   @** マップ *@
+   <div id="wrapper">
+    <div id="map"></div>
+   </div>
+
 </div>
 
-<div class="content__section detail">
- <div class="title">
-  <label class="inline">作品名：</label>
-  <p class="inline">@vv.post.title</p>
- </div>
- <div class="content">
-  <label class="inline">説明：</label>
-  <p class="inline">@vv.post.content</p>
- </div>
- <div class="address">
-  <label class="inline">住所：</label>
-  <p class="inline">@vv.spot.address</p>
- </div>
-</div>
-
- @** マップ *@
- <div id="wrapper">
-  <div id="map"></div>
- </div>
-
-
- <script src="http://maps.google.com/maps/api/js?key=AIzaSyDyJExnzV4eE4GR1cvThMiJVPOWJrLwPG0&language=ja"></script>
- <script>
+   <script src="http://maps.google.com/maps/api/js?key=AIzaSyDyJExnzV4eE4GR1cvThMiJVPOWJrLwPG0&language=ja"></script>
+   <script>
 
 var map;
 var marker = [];

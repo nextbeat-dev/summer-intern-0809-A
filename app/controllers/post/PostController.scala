@@ -10,11 +10,12 @@ package controllers.post
 import model.component.util.ViewValuePageLayout
 import play.api.i18n.I18nSupport
 import play.api.mvc.{AbstractController, MessagesControllerComponents}
-import scala.concurrent._
 import persistence.post.dao.PostDAO
 import persistence.spot.dao.SpotDAO
 import persistence.post.model.Post
+import persistence.post.model.Post.formForPostSearch
 import model.site.post.SiteViewValuePostShow
+import scala.concurrent._
 
 // 施設
 //~~~~~~~~~~~~~~~~~~~~~
@@ -39,4 +40,49 @@ class PostController @javax.inject.Inject()(
       Ok(views.html.site.post.show.Main(vv))
     }
   }
+
+
+  def search = Action.async { implicit request =>
+    Future {
+      Ok(views.html.site.home.Main(ViewValuePageLayout(id = request.uri), formForPostSearch))
+    }
+  }
+    /*
+    formForPostSearch.bindFromRequest.fold(
+      errors => {
+        for {
+          p <- postDAO.get(id)
+          s <- spotDAO.get(p.get.spot_id)
+        } yield {
+          val vv = SiteViewValuePostShow(
+            layout     = ViewValuePageLayout(id = request.uri),
+            post   = p.get,
+            spot = s.get
+          )
+          Ok(views.html.site.post.show.Main(vv))
+        }
+      },
+      form   => {
+        for {
+          locSeq      <- daoLocation.filterByIds(Location.Region.IS_PREF_ALL)
+          facilitySeq <- form.locationIdOpt match {
+            case Some(id) =>
+              for {
+                locations   <- daoLocation.filterByPrefId(id)
+                facilitySeq <- facilityDao.filterByLocationIds(locations.map(_.id))
+              } yield facilitySeq
+            case None     => facilityDao.findAll
+          }
+        } yield {
+          val vv = SiteViewValueFacilityList(
+            layout     = ViewValuePageLayout(id = request.uri),
+            location   = locSeq,
+            facilities = facilitySeq
+          )
+          Ok(views.html.site.facility.list.Main(vv, formForFacilitySearch.fill(form)))
+        }
+      }
+    )
+  }*/
+
 }

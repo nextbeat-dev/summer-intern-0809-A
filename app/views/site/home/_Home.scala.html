@@ -7,27 +7,19 @@
 @import views.html.helper
 @import model.component.util.ViewValuePageLayout
 @import play.api.data.Form
+@import persistence.post.model.PostSearch
 
-@(vv: ViewValuePageLayout)(implicit messages: play.api.i18n.Messages)
+@(vv: ViewValuePageLayout, form: Form[PostSearch])(implicit messages: play.api.i18n.Messages)
 
 @** 施設検索一覧 *@
 @views.html.common.layout.InnerContent("site-app-home", "content") {
 @** --[ 検索フォーム ]---------------------------------------------------------- *@
 <div class="content__section form">
- @helper.form(action = controllers.facility.routes.FacilityController.search) {
-
+ @helper.form(action = controllers.post.routes.PostController.search) {
 
  @** 作品名 *@
  <div class="form__section pref inline">
-  @*
-  @helper.select(
-  field   = form("locationId"),
-  options = vv.location.map(v => (v.id, v.namePref)),
-  '_label           -> "都道府県",
-  '_default         -> "未選択",
-  '_showConstraints -> false
-  )
-  *@
+  @(helper.inputText(form("query"), '_label -> ""))
  </div>
 
  @** 登録ボタン *@

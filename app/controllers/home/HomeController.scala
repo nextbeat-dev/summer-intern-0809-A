@@ -8,19 +8,28 @@
 package controllers.home
 
 import model.component.util.ViewValuePageLayout
+import mvc.action.AuthenticationAction
+import persistence.udb.dao.UserDAO
 import play.api.i18n.I18nSupport
-import play.api.mvc.{AbstractController, MessagesControllerComponents}
+import play.api.mvc.{ AbstractController, MessagesControllerComponents }
+
 import scala.concurrent._
 import persistence.post.model.Post._
 
 // 施設
 //~~~~~~~~~~~~~~~~~~~~~
 class HomeController @javax.inject.Inject()(
-                                             cc: MessagesControllerComponents
-                                           ) extends AbstractController(cc) with I18nSupport {
+  implicit val daoUser: UserDAO,
+  cc: MessagesControllerComponents,
+) extends AbstractController(cc) with I18nSupport {
   implicit lazy val executionContext = defaultExecutionContext
 
-  def view = Action.async { implicit request =>
+  def view = (Action andThen AuthenticationAction()).async { implicit request =>
+
+    /**
+     * request.user でログインユーザ情報が取得できる
+     */
+
     Future{
       Ok(views.html.site.home.Main(ViewValuePageLayout(id = request.uri), formForPostSearch))
     }

@@ -7,6 +7,8 @@ GET /home/                             controllers.home.HomeController.view
 # --[ 登録処理 ]----------------------------------------------------------------
 GET   /app/new-user                     controllers.app.NewUserController.viewForApp
 POST  /app/new-user                     controllers.app.NewUserCommitController.application
+GET   /login                            controllers.app.AuthController.login
+POST  /login                            controllers.app.AuthController.loginCommit
 
 # --[ Post ]---------------------------------------------------------------------
 GET /post/:id                          controllers.post.PostController.show(id: Long)

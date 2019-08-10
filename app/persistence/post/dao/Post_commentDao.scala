@@ -8,24 +8,24 @@ import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
 
 import persistence.post.model.Post
-import persistence.post.model.Post_comment
+import persistence.post.model.PostComment
 import persistence.udb.model.User
 
 // DAO: ユーザ情報
 //~~~~~~~~~~~~~~~~~~
-class Post_CommentDAO @javax.inject.Inject()(
+class PostCommentDAO @javax.inject.Inject()(
                                       val dbConfigProvider: DatabaseConfigProvider
                                     ) extends HasDatabaseConfigProvider[JdbcProfile] {
   import profile.api._
 
   // --[ リソース定義 ] --------------------------------------------------------
-  lazy val slick = TableQuery[Post_CommentTable]
+  lazy val slick = TableQuery[PostCommentTable]
 
   // --[ データ処理定義 ] ------------------------------------------------------
   /**
     * Postに対するコメント情報を追加する
     */
-  def add(data: Post_comment) =
+  def add(data: PostComment) =
     db.run {
       data.id match {
         case None    => slick returning slick.map(_.id) += data
@@ -39,7 +39,7 @@ class Post_CommentDAO @javax.inject.Inject()(
     * postに対するコメントを取得する
     */
 
-  def get(id: Post_comment.Id) =
+  def get(id: PostComment.Id) =
     db.run {
       slick
         .filter(_.id === id)
@@ -71,10 +71,10 @@ class Post_CommentDAO @javax.inject.Inject()(
     }
 
   // --[ テーブル定義 ] --------------------------------------------------------
-  class Post_CommentTable(tag: Tag) extends Table[Post_comment](tag, "post_comment") {
+  class PostCommentTable(tag: Tag) extends Table[PostComment](tag, "post_comment") {
 
     // Table's columns
-    /* @1 */ def id        = column[Post_comment.Id]       ("id", O.PrimaryKey, O.AutoInc)  // POST ID
+    /* @1 */ def id        = column[PostComment.Id]       ("id", O.PrimaryKey, O.AutoInc)  // POST ID
     /* @2 */ def content   = column[String]                ("content")           // postに対するコメント内容 content
     /* @3 */ def postId    = column[Post.Id]               ("post_id")           // 対応するpostのid
     /* @4 */ def userId    = column[User.Id]               ("user_id")           // 投稿したユーザーのid
@@ -86,9 +86,9 @@ class Post_CommentDAO @javax.inject.Inject()(
       id.?, content, postId, userId, updatedAt, createdAt
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
-      (Post_comment.apply _).tupled,
+      (PostComment.apply _).tupled,
       /** The bidirectional mappings : Model => Tuple(table) */
-      (v: TableElementType) => Post_comment.unapply(v).map(_.copy(
+      (v: TableElementType) => PostComment.unapply(v).map(_.copy(
         _5 = LocalDateTime.now
       ))
     )

@@ -20,9 +20,6 @@ GET  /facility/search                  controllers.facility.FacilityController.s
 # --[ 特集ページ ]--------------------------------------------------------------
 GET  /recruit/intership-for-summer-21  controllers.recruit.InternshipForSummer21Controller.view
 
-# --[ mypage ]---------------------
-GET  /mypage       controllers.mypage.MypageController.show
-
 # --[ その他 ]------------------------------------------------------------------
 GET  /assets/*file  controllers.Assets.versioned(path = "/public", file)
 GET  /              controllers.ApplicationController.redirect(to = "/recruit/intership-for-summer-21", from = "")

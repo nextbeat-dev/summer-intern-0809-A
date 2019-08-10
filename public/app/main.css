@@ -878,39 +878,3 @@ display: inline-block;}
       font-style: italic;
       font-family: "Roboto", sans-serif;
       letter-spacing: 3px; }
-
-
-      #mypage .content__section .inline {
-        display: inline-block; }
-
-      #mypage .content__section.form {
-        margin: 10px auto; }
-        #mypage .content__section.form .button {
-          margin-left: 15px;
-          font-weight: bold;
-          width: 80px;
-          height: 30px; }
-
-      #mypage .content__section.content {
-        width: 1024px;
-        margin: auto; }
-        #mypage .content__section.content article {
-          margin: 0 auto;
-          margin-bottom: 16px;
-          cursor: pointer;
-          background: #fff;
-          border-radius: 4px;
-          box-shadow: 0 1px 2px 0 rgba(199, 199, 199, 0.5);
-          position: relative;
-          width: 650px; }
-          #mypage .content__section.content article .item-panel__wrapper {
-            padding: 16px;
-            width: 100%; }
-            #mypage .content__section.content article .item-panel__wrapper .post-item__header {
-              font-weight: bold;
-              font-size: 1.14286rem; }
-            #mypage .content__section.content article .item-panel__wrapper .post-item__content {
-              margin-top: 10px; }
-              #mypage .content__section.content article .item-panel__wrapper .post-item__content label {
-                font-weight: bold;
-                margin-right: 5px; }

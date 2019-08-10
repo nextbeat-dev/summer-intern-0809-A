@@ -15,17 +15,17 @@ import persistence.udb.model.User
 // post情報
 // post と　user をつなぐ中間テーブル likeに使えると思う
 //~~~~~~~~~~~~~
-case class Post_user(
-                 id:        Option[Post_user.Id],               // Id
-                 user_id:   User.Id,                            // ユーザーのid
-                 post_id:   Post.Id,                            // ポストのid
-                 updatedAt: LocalDateTime = LocalDateTime.now,  // データ更新日
-                 createdAt: LocalDateTime = LocalDateTime.now   // データ作成日
+case class PostUser(
+                      id:        Option[PostUser.Id], // Id
+                      userId:    User.Id, // ユーザーのid
+                      postId:    Post.Id, // ポストのid
+                      updatedAt: LocalDateTime = LocalDateTime.now, // データ更新日
+                      createdAt: LocalDateTime = LocalDateTime.now // データ作成日
                )
 
 // コンパニオンオブジェクト
 //~~~~~~~~~~~~~~~~~~~~~~~~~~
-object Post_user {
+object PostUser {
 
   // --[ 管理ID ]---------------------------------------------------------------
   type Id = Long
@@ -33,11 +33,11 @@ object Post_user {
   // --[ フォーム定義 ]---------------------------------------------------------
   val formForNewPost_user = Form(
     mapping(
-      "user_id"   -> longNumber,
-      "post_id"   -> longNumber,
+      "userId"   -> longNumber,
+      "postId"   -> longNumber,
     )(Function.untupled(
-      t => Post_user(None, t._1, t._2)
-    ))(Post_user.unapply(_).map(
+      t => PostUser(None, t._1, t._2)
+    ))(PostUser.unapply(_).map(
       t => (t._2, t._3)
     ))
   )

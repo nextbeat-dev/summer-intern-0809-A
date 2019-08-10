@@ -7,18 +7,18 @@ import persistence.udb.model.User
 
 // postに付属するコメント情報
 //~~~~~~~~~~~~~
-case class Post_comment(
-                 id:        Option[Post_comment.Id],            // postId
+case class PostComment(
+                 id:        Option[PostComment.Id],            // postId
                  content:   String,                             // 投稿内容
-                 post_id:   Post.Id,                            // Spot.id
-                 user_id:   User.Id,                            // 投稿したユーザーのid
+                 postId:    Post.Id,                            // Spot.id
+                 userId:    User.Id,                            // 投稿したユーザーのid
                  updatedAt: LocalDateTime = LocalDateTime.now,  // データ更新日
                  createdAt: LocalDateTime = LocalDateTime.now   // データ作成日
                )
 
 // コンパニオンオブジェクト
 //~~~~~~~~~~~~~~~~~~~~~~~~~~
-object Post_comment {
+object PostComment {
 
   // --[ 管理ID ]---------------------------------------------------------------
   type Id = Long
@@ -30,8 +30,8 @@ object Post_comment {
       "postId"    -> longNumber,
       "userId"    -> longNumber,
     )(Function.untupled(
-      t => Post_comment(None, t._1, t._2, t._3)
-    ))(Post_comment.unapply(_).map(
+      t => PostComment(None, t._1, t._2, t._3)
+    ))(PostComment.unapply(_).map(
       t => (t._2, t._3, t._4)
     ))
   )

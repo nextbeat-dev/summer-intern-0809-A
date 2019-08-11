@@ -33,19 +33,18 @@
     @** 採用ロゴ *@
     <div class="content__section logo">
       @views.html.common.component.image.ResponsiveImage(
-        path    = "common/logo_light.png",
+        path    = "common/ctlove.png",
         alt     = "Nextbeat",
         classes = "logo__image",
         maxSize = 1
       )
-      <span class="logo__text">RECRUITMENT</span>
     </div>
 
-    @** メニュー: プライマリー *@
+    @*
     <div class="content__section data-list menu-1st">
       <ol class="data-list__inner">
         <li class="data-list__item">
-          <a class="menu-1st__link" target="_blank" href="/recruit/interview">インタビュー</a>
+          <a class="menu-1st__link" target="_blank" href="/recruit/interview">CTloveって？</a>
         </li>
         <li class="data-list__item">
           <a class="menu-1st__link" target="_blank" href="/recruit/work-style">ワークスタイル</a>
@@ -55,18 +54,19 @@
         </li>
       </ol>
     </div>
+    *@
 
     @** メニュー: セカンダリー *@
     <div class="content__section data-list menu-2nd">
       <ol class="data-list__inner">
         <li class="data-list__item">
-          <a class="menu-2nd__link" target="_blank" href="/about/overview">企業情報</a>
+          <a class="menu-2nd__link" target="_blank" href="/about/overview">CTloveって？</a>
         </li>
         <li class="data-list__item">
           <a class="menu-2nd__link" target="_blank" href="/services">サービス</a>
         </li>
         <li class="data-list__item">
-          <a class="menu-2nd__link" target="_blank" href="/news">ニュース</a>
+          <a class="menu-2nd__link" target="_blank" href="/news">よくある質問</a>
         </li>
         <li class="data-list__item">
           <a class="menu-2nd__link" target="_blank" href="/contact">お問い合わせ</a>
@@ -128,7 +128,7 @@
     @** コピーライト *@
     <small class="content__section copyright">
       <span class="copyright__mark">&copy;</span>
-      <span class="copyright__text">@(java.time.LocalDate.now.getYear) nextbeat Co.Ltd.</span>
+      <span class="copyright__text">@(java.time.LocalDate.now.getYear) animal.inc</span>
     </small>
   </div>
 </footer>

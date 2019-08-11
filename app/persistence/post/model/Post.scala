@@ -55,7 +55,7 @@ object Post {
 
   val formForPostSearch = Form(
   mapping(
-    "query" -> optional(text),
+    "query" -> optional(default(text, "作品名")),
   )(PostSearch.apply)(PostSearch.unapply)
   )
 }

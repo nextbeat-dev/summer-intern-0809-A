@@ -1,8 +1,9 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
-# --[ホーム]
-GET /home/                              controllers.home.HomeController.view
+
+GET /home/                             controllers.home.HomeController.view
+GET /home/                             controllers.home.HomeController.search
 
 # --[ 登録処理 ]----------------------------------------------------------------
 GET   /app/new-user                     controllers.app.NewUserController.viewForApp

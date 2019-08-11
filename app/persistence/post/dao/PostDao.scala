@@ -60,6 +60,12 @@ class PostDAO @javax.inject.Inject()(
         .result
     }
 
+  def filterByTitle(title: String) =
+    db.run{
+      slick.filter(_.title === title)
+        .result
+    }
+
   /**
     * postを削除する
     */

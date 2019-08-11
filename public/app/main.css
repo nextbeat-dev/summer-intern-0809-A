@@ -472,8 +472,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #direction{
-    margin: 10px;
+    margin: 50px;
     text-align: center;
+}
+
+#direction #destination{
+    margin: 10px;
 }
 
 #site-app-home .content__section .inline{
@@ -498,7 +502,6 @@ display: inline-block;}
     padding: 10px;
     width: 50%;
     box-sizing: border-box;
-    border: medium solid #dddddd;
 }
 
 .inner_window_wrapper .right p{

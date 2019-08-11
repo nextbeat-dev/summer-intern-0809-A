@@ -12,7 +12,7 @@ import model.site.mypage.SiteViewValueUserShow
 // 施設
 //~~~~~~~~~~~~~~~~~~~~~
 class MypageController @javax.inject.Inject()(
-  val userDao: UserDAO,
+  implicit val daoUser: UserDAO,
   val postDao: PostDAO,
   cc: MessagesControllerComponents
 ) extends AbstractController(cc) with I18nSupport {
@@ -22,12 +22,11 @@ class MypageController @javax.inject.Inject()(
   /**
     * mypage
     */
-  // def show = (Action andThen AuthenticationAction()).async { implicit request =>
-  def show() = Action.async { implicit request =>
-
+   def show = (Action andThen AuthenticationAction()).async { implicit request =>
+  //def show() = Action.async { implicit request =>
+    val user = request.user
     for {
-      // user <- request.user
-      Some(user) <- userDao.get(1)
+      //Some(user) <- daoUser.get(1)
       postSeq    <- postDao.getByUserId(user.id.get)
     } yield {
 

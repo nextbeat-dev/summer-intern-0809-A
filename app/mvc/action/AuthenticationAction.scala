@@ -1,7 +1,5 @@
 package mvc.action
 
-
-
 import persistence.udb.dao.UserDAO
 import persistence.udb.model.User
 import play.api.mvc.Results._
@@ -21,11 +19,8 @@ case class AuthenticationAction()(implicit
 
   protected def refine[A](request: Request[A]): Future[Either[Result, UserRequest[A]]] = {
     val sUserIdOpt = request.session.get("user_id")
-    println("----------0")
     sUserIdOpt match {
-      case None          =>
-        println("----------1")
-        Future.successful(Left(Redirect("/login", 301)))
+      case None          => Future.successful(Left(Redirect("/login", 301)))
       case Some(sUserId) => for {
         userOpt <- daoUser.get(sUserId.toLong)
       } yield
@@ -33,9 +28,7 @@ case class AuthenticationAction()(implicit
           case Some(user) =>
             val userRequest = UserRequest(user, request)
             Right(userRequest)
-          case None =>
-            println("----------2")
-            Left(Redirect("/login", 301))
+          case None => Left(Redirect("/login", 301))
         }
     }
   }

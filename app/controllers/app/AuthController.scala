@@ -47,20 +47,32 @@ class AuthController @javax.inject.Inject()(
       },
       form => {
         for {
-          Some(user)     <- daoUser.findByEmail(form.email)
-          Some(password) <- daoUserPassword.get(user.id.get)
-        } yield {
-          if (form.password.isBcryptedSafe(password.password).getOrElse(false)) {
-            Redirect("/home/")
-              .withSession(
-                request.session + ("user_id" -> user.id.get.toString)
-              )
-          } else {
-            val vv = SiteViewValueAuthLogin(
-              layout = ViewValuePageLayout(id = request.uri)
-            )
-            BadRequest(views.html.site.app.login.Main(vv, LoginForm.formLogin))
+          userOpt     <- daoUser.findByEmail(form.email)
+          passwordOpt <- userOpt match {
+            case Some(user) => daoUserPassword.get(user.id.get)
+            case None => Future.successful(None)
           }
+        } yield {
+          passwordOpt match {
+            case Some(password) =>
+              if (form.password.isBcryptedSafe(password.password).getOrElse(false)) {
+                Redirect("/home/")
+                  .withSession(
+                    request.session + ("user_id" -> password.id.get.toString)
+                  )
+              } else {
+                val vv = SiteViewValueAuthLogin(
+                  layout = ViewValuePageLayout(id = request.uri)
+                )
+                BadRequest(views.html.site.app.login.Main(vv, LoginForm.formLogin))
+              }
+            case None =>
+              val vv = SiteViewValueAuthLogin(
+                layout = ViewValuePageLayout(id = request.uri)
+              )
+              BadRequest(views.html.site.app.login.Main(vv, LoginForm.formLogin))
+          }
+
         }
       }
     )

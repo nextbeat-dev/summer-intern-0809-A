@@ -12,8 +12,11 @@ GET   /login                            controllers.app.AuthController.login
 POST  /login                            controllers.app.AuthController.loginCommit
 
 # --[ Post ]---------------------------------------------------------------------
+GET /post/register                     controllers.post.RegisterController.register
+POST /post/register                    controllers.post.RegisterController.application
 GET /post/:id                          controllers.post.PostController.show(id: Long)
 POST /post/comment/:id                    controllers.post.PostController.create(id: Long)
+
 
 # --[ 施設ページ ]----------------------------------------------------------------
 GET  /facility/list                    controllers.facility.FacilityController.list

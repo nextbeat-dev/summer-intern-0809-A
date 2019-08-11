@@ -8,8 +8,10 @@
 package controllers.post
 
 import model.component.util.ViewValuePageLayout
+import model.site.app.{NewUserForm, SiteViewValueNewUser}
 import play.api.i18n.I18nSupport
 import play.api.mvc.{AbstractController, MessagesControllerComponents}
+
 import scala.concurrent._
 import mvc.action.AuthenticationAction
 import persistence.post.dao.PostDAO
@@ -18,9 +20,11 @@ import persistence.udb.dao.UserDAO
 import persistence.post.model.Post
 import persistence.post.model.Post.formForPostSearch
 import model.site.post.SiteViewValuePostShow
+import persistence.geo.model.Location
 import model.site.post.SiteViewValueHome
 import persistence.post.model.PostComment.formForNewPostComment
 import persistence.post.dao.PostCommentDAO
+
 
 // 施設
 //~~~~~~~~~~~~~~~~~~~~~

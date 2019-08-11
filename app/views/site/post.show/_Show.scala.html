@@ -18,10 +18,17 @@
 
 <div class="content__column">
    <div class="content__section photo">
-   @views.html.common.component.image.ResponsiveImage(
-   path    = "site/recruit/internship_for_summer_21/03_mentor-kawai.png",
-   alt     = "エンジニア 川井 淳矢",
-   classes = "photo__image")
+   @vv.post.image match {
+       case Some(image) => {
+            <img src="@vv.post.image">
+       }
+       case None => {
+           @views.html.common.component.image.ResponsiveImage(
+           path    = "site/recruit/internship_for_summer_21/03_mentor-kawai.png",
+           alt     = "エンジニア 川井 淳矢",
+           classes = "photo__image")
+        }
+    }
    </div>
 
    <div class="content__section detail">

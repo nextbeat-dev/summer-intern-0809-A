@@ -1,5 +1,9 @@
 package controllers.post
 
+import java.io.File
+import java.nio.file.Files
+import java.util.Base64
+
 import play.api.i18n.I18nSupport
 import play.api.mvc.{AbstractController, MessagesControllerComponents}
 import model.site.post.{PostSpotForm, SiteViewValuePostSpot}
@@ -46,7 +50,17 @@ class RegisterController @javax.inject.Inject()(
   /**
     * 新規登録
     */
-  def application = (Action andThen AuthenticationAction()).async { implicit request =>
+  def application = (Action(parse.multipartFormData) andThen AuthenticationAction()).async { implicit request =>
+
+    val postedImage = request.body.file("postImage")
+    var imageData: Option[String] = null
+
+    if(postedImage != None){
+      val mimeType = postedImage.get.contentType.get
+      val imageByte: Array[Byte] = Base64.getEncoder().encode(Files.readAllBytes(postedImage.get.ref.path))
+      imageData = Some("data:" + mimeType + ";base64," + new String(imageByte))
+    }
+
     PostSpotForm.formForPostSpot.bindFromRequest.fold(
       errors => {
         for {
@@ -61,9 +75,10 @@ class RegisterController @javax.inject.Inject()(
       },
       postSpot   => {
         val newForm = postSpot.copy(userId = request.user.id)
+        val newnewForm = newForm.copy(image = imageData)
         for {
-          id <- spotDAO.add(newForm.toSpot)
-          _  <- postDAO.add(newForm.toPost(id))
+          id <- spotDAO.add(newnewForm.toSpot)
+          _  <- postDAO.add(newnewForm.toPost(id))
         } yield {
           // TODO: セッション追加処理
           Redirect("/home/")

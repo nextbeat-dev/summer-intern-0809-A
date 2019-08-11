@@ -84,18 +84,15 @@ class PostUserDAO @javax.inject.Inject()(
     /* @1 */ def id        = column[PostUser.Id]  ("id", O.PrimaryKey, O.AutoInc)
     /* @2 */ def userId    = column[User.Id]       ("user_id")           // user id
     /* @3 */ def postId    = column[Post.Id]       ("post_id")           // post id
-    /* @4 */ def updatedAt = column[LocalDateTime] ("updated_at")        // データ更新日
-    /* @5 */ def createdAt = column[LocalDateTime] ("created_at")        // データ作成日
 
     // The * projection of the table
     def * = (
-      id.?, userId, postId, updatedAt, createdAt
+      id.?, userId, postId
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
       (PostUser.apply _).tupled,
       /** The bidirectional mappings : Model => Tuple(table) */
       (v: TableElementType) => PostUser.unapply(v).map(_.copy(
-        _4 = LocalDateTime.now
       ))
     )
   }

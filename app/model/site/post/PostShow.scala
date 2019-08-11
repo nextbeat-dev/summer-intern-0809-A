@@ -12,6 +12,7 @@ import persistence.post.model.Post
 import persistence.spot.model.Spot
 import play.api.libs.json._
 import persistence.post.model.PostComment
+import persistence.post.model.PostUser
 
 // 表示: 施設一覧
 //~~~~~~~~~~~~~~~~~~~~~
@@ -19,6 +20,7 @@ case class SiteViewValuePostShow(
   layout:   ViewValuePageLayout,
   post: Post,
   spot: Spot,
+  likes: Seq[PostUser],
   comments: Seq[PostComment]
 )
 

@@ -21,7 +21,7 @@
 
 @** --[ フォーム ]-------------------------------------------------------- *@
 <div class="content__section form">
-    @helper.form(action = controllers.post.routes.RegisterController.application()) {
+    @helper.form(action = controllers.post.routes.RegisterController.application(), 'enctype -> "multipart/form-data") {
 
     @** 名前 *@
     <div class="form__section name-container">
@@ -33,21 +33,25 @@
           )
         </span>
         <span class="form__section content">
-          @helper.inputText(
+          @helper.textarea(
             form("content"),
             '_label           -> "場所の説明",
-            '_showConstraints -> false
+            '_showConstraints -> false,
+            'rows -> 5
           )
         </span>
     </div>
 
     @** 画像 *@
     <div class="form__section image">
-        @helper.inputText(
-        form("image"),
-        '_label           -> "画像",
-        '_showConstraints -> false
-        )
+        <dl>
+            <dt>
+                <label for="image">画像(png, jpg, jpegのみ)</label>
+            </dt>
+            <dd>
+                <input type="file" id="image" name="postImage" accept="image/png, image/jpeg, image/jpg">
+            </dd>
+        </dl>
     </div>
 
     @** 住所 *@
@@ -59,20 +63,20 @@
         )
     </div>
 
-    @** 緯度 *@
+    @** 経度 **@
     <div class="form__section longitude">
         @helper.inputText(
         form("longitude"),
-        '_label           -> "緯度",
+        '_label           -> "経度",
         '_showConstraints -> false
         )
     </div>
 
-    @** 経度 *@
+    @** 緯度 *@
     <div class="form__section latitude">
         @helper.inputText(
         form("latitude"),
-        '_label           -> "経度",
+        '_label           -> "緯度",
         '_showConstraints -> false
         )
     </div>

@@ -19,8 +19,6 @@ case class PostUser(
                       id:        Option[PostUser.Id], // Id
                       userId:    User.Id, // ユーザーのid
                       postId:    Post.Id, // ポストのid
-                      updatedAt: LocalDateTime = LocalDateTime.now, // データ更新日
-                      createdAt: LocalDateTime = LocalDateTime.now // データ作成日
                )
 
 // コンパニオンオブジェクト

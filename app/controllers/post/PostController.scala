@@ -24,6 +24,7 @@ import persistence.geo.model.Location
 import model.site.post.SiteViewValueHome
 import persistence.post.model.PostComment.formForNewPostComment
 import persistence.post.dao.PostCommentDAO
+import persistence.post.dao.PostUserDAO
 
 
 // 施設
@@ -31,6 +32,7 @@ import persistence.post.dao.PostCommentDAO
 class PostController @javax.inject.Inject()(
          postDAO: PostDAO,
          spotDAO: SpotDAO,
+         likeDao: PostUserDAO,
          implicit val userDao: UserDAO,
          postCommentDao: PostCommentDAO,
          cc: MessagesControllerComponents
@@ -43,12 +45,14 @@ class PostController @javax.inject.Inject()(
     for {
       p <- postDAO.get(id)
       s <- spotDAO.get(p.get.spotId)
+      likes <- likeDao.getFilterByPostId(id)
       comment <- postCommentDao.getFilterByPostId(id)
     } yield {
       val vv = SiteViewValuePostShow(
         layout = ViewValuePageLayout(id = request.uri),
         post   = p.get,
         spot   = s.get,
+        likes  = likes,
         comments = comment
       )
       Ok(views.html.site.post.show.Main(vv, formForNewPostComment))

@@ -11,13 +11,15 @@ import model.component.util.ViewValuePageLayout
 import persistence.post.model.Post
 import persistence.spot.model.Spot
 import play.api.libs.json._
+import persistence.post.model.PostComment
 
 // 表示: 施設一覧
 //~~~~~~~~~~~~~~~~~~~~~
 case class SiteViewValuePostShow(
   layout:   ViewValuePageLayout,
   post: Post,
-  spot: Spot
+  spot: Spot,
+  comments: Seq[PostComment]
 )
 
 case class SiteViewValueHome

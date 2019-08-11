@@ -7,10 +7,10 @@
 @import views.html.helper
 @import play.api.data.Form
 @import persistence.post.model.Post
-
+@import persistence.post.model.PostComment
 @import model.site.post.SiteViewValuePostShow
 
-@(vv: SiteViewValuePostShow)(implicit messages: play.api.i18n.Messages)
+@(vv: SiteViewValuePostShow, form: Form[PostComment] )(implicit messages: play.api.i18n.Messages)
 
 @** 施設検索一覧 *@
 @views.html.common.layout.InnerContent("site-app-post-show", "content") {
@@ -44,7 +44,48 @@
     <div id="map"></div>
    </div>
 
+<div style="text-align:center;">
+ <h1 style="font-size: 40px;">寄せられたコメント(@vv.comments.length)</h1>
+ <div class="content__section content">
+
+  @for(comment <- vv.comments) {
+  <article class="comment-list-item">
+   <a href="#">
+    <div class="item-panel__wrapper">
+     <header class="comment-item__header">
+      <div class="name" style="text-align: left;">
+       @comment.content
+      </div>
+     </header>
+    </div>
+   </a>
+  </article>
+  }
+
+ </div>
 </div>
+
+<div style="text-align:center;">
+ @helper.form(action = controllers.post.routes.PostController.create(vv.post.id.get)){
+
+  <div class="form__section">
+   @helper.inputText(
+   form("content"),
+   '_label -> "コメント",
+   '_showConstraints -> false
+   )
+  </div>
+  <input type="hidden" name="postId" value="@vv.post.id">
+
+  <div class="form__section submit">
+   <button class="button button-stroked" type="submit">
+    <span class="submit__text">コメント登録</span>
+   </button>
+  </div>
+
+ }
+</div>
+
 
 <script src="http://maps.google.com/maps/api/js?key=AIzaSyDyJExnzV4eE4GR1cvThMiJVPOWJrLwPG0&language=ja"></script>
 <script>

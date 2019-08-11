@@ -13,6 +13,7 @@ POST  /login                            controllers.app.AuthController.loginComm
 
 # --[ Post ]---------------------------------------------------------------------
 GET /post/:id                          controllers.post.PostController.show(id: Long)
+POST /post/comment/:id                    controllers.post.PostController.create(id: Long)
 
 # --[ 施設ページ ]----------------------------------------------------------------
 GET  /facility/list                    controllers.facility.FacilityController.list
@@ -20,6 +21,9 @@ GET  /facility/search                  controllers.facility.FacilityController.s
 
 # --[ 特集ページ ]--------------------------------------------------------------
 GET  /recruit/intership-for-summer-21  controllers.recruit.InternshipForSummer21Controller.view
+
+# --[ mypage ]---------------------
+GET  /mypage       controllers.mypage.MypageController.show
 
 # --[ その他 ]------------------------------------------------------------------
 GET  /assets/*file  controllers.Assets.versioned(path = "/public", file)

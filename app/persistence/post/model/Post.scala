@@ -20,11 +20,16 @@ case class Post(
                  title:     String,                             // 投稿タイトル
                  content:   String,                             // 投稿内容
                  image:     Option[String],                             // 画像をbase64でエンコード
-                 spot_id:   Spot.Id,                            // Spot.id
-                 user_id:   User.Id,                            // 投稿したユーザーのid
+                 userId:    User.Id,                            // 投稿したユーザーのid
+                 spotId:    Spot.Id,                            // Spot.id
                  updatedAt: LocalDateTime = LocalDateTime.now,  // データ更新日
                  createdAt: LocalDateTime = LocalDateTime.now   // データ作成日
                )
+
+// 施設検索
+case class PostSearch(
+                       query: Option[String]
+                     )
 
 // コンパニオンオブジェクト
 //~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -46,6 +51,12 @@ object Post {
     ))(Post.unapply(_).map(
       t => (t._2, t._3, t._4, t._5, t._6)
     ))
+  )
+
+  val formForPostSearch = Form(
+  mapping(
+    "locationId" -> optional(text),
+  )(PostSearch.apply)(PostSearch.unapply)
   )
 }
 

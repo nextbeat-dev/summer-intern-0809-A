@@ -38,7 +38,7 @@ class PostController @javax.inject.Inject()(
   def show(id: Post.Id) = Action.async { implicit request =>
     for {
       p <- postDAO.get(id)
-      s <- spotDAO.get(p.get.spot_id)
+      s <- spotDAO.get(p.get.spotId)
       comment <- postCommentDao.getFilterByPostId(id)
     } yield {
       val vv = SiteViewValuePostShow(

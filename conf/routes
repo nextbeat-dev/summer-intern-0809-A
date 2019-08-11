@@ -3,7 +3,7 @@
 # ~~~~
 
 GET /home/                             controllers.home.HomeController.view
-GET /home/                             controllers.home.HomeController.search
+POST /search/                          controllers.home.HomeController.search
 
 # --[ 登録処理 ]----------------------------------------------------------------
 GET   /app/new-user                     controllers.app.NewUserController.viewForApp

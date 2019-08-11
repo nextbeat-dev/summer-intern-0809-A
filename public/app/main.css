@@ -48,12 +48,23 @@ body {
   display: table;
   box-sizing: border-box; }
 
+.nav-global-simple .content__inner .link__mypage {
+    height: 80px;
+    margin: 0 auto;
+}
+
+.nav-global-simple .content__inner .link__mypage .text{
+    line-height: 80px;
+    text-align: right;
+}
 .nav-global-simple .content__section {
   display: table-cell;
   vertical-align: middle; }
 
 .nav-global-simple .content__section.logo .logo__image {
   height: 50px; }
+
+
 
 #nav-footer.content {
   position: relative;

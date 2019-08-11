@@ -55,7 +55,7 @@ object Post {
 
   val formForPostSearch = Form(
   mapping(
-    "locationId" -> optional(text),
+    "query" -> optional(text),
   )(PostSearch.apply)(PostSearch.unapply)
   )
 }

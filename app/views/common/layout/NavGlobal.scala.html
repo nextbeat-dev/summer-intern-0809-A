@@ -13,20 +13,20 @@
       <a class="logo__inner" href=@controllers.home.routes.HomeController.view>
         @views.html.common.component.image.ResponsiveImage(
           alt     = vv.messages("_image-service-logo"),
-          path    = "common/logo.png",
+          path    = "common/ctlove.png",
           classes = "logo__image",
           maxSize = 1
         )
       </a>
     </h1>
-      <div class="link__mypage">
-      <h3>
-          <a href=@controllers.mypage.routes.MypageController.show>
-              <div class="text">
-              マイページ
-              </div>
-          </a>
-      </h3>
-      </div>
+    <ul style="list-style: none; float: right; margin-right: 40px;">
+        <li class="link__top" style="margin-left: 10px;line-height: 60px;display: inline;">
+           <a href=@controllers.home.routes.HomeController.view>TOP</a>
+        </li>
+        <li class="link__mypage" style="margin-left: 10px;line-height: 60px;display: inline;">
+           <a href=@controllers.mypage.routes.MypageController.show>マイページ</a>
+        </li>
+    </ul>
+
   </div>
 </header>

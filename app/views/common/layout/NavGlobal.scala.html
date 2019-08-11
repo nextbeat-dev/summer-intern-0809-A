@@ -10,7 +10,7 @@
   <div class="content__inner">
     @** ロゴ *@
     <h1 class="content__section logo">
-      <a class="logo__inner" href="/">
+      <a class="logo__inner" href=@controllers.home.routes.HomeController.view>
         @views.html.common.component.image.ResponsiveImage(
           alt     = vv.messages("_image-service-logo"),
           path    = "common/logo.png",
@@ -19,5 +19,14 @@
         )
       </a>
     </h1>
+      <div class="link__mypage">
+      <h3>
+          <a href=@controllers.mypage.routes.MypageController.show>
+              <div class="text">
+              マイページ
+              </div>
+          </a>
+      </h3>
+      </div>
   </div>
 </header>

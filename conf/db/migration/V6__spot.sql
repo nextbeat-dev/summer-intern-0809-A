@@ -14,3 +14,7 @@ CREATE TABLE "spot" (
 INSERT INTO "spot" ("address", "longitude", "latitude") VALUES ('宮城県石巻市', 141.361477, 38.415452);
 INSERT INTO "spot" ("address", "longitude", "latitude") VALUES ('東京都新宿区', 139.701826, 35.683679);
 INSERT INTO "spot" ("address", "longitude", "latitude") VALUES ('東京都中央区', 139.767145, 35.671720);
+INSERT INTO "spot" ("address", "longitude", "latitude") VALUES ('北海道', 142.540049, 43.3040214);
+INSERT INTO "spot" ("address", "longitude", "latitude") VALUES ('北海道', 142.4005825, 43.2918496);
+INSERT INTO "spot" ("address", "longitude", "latitude") VALUES ('北海道', 142.4359786, 43.3411513);
+INSERT INTO "spot" ("address", "longitude", "latitude") VALUES ('北海道', 142.3626772, 43.3233133);

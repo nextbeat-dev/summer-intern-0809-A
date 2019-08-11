@@ -28,11 +28,11 @@ case class SiteViewValueHome
   jsonStr: String
 )
 
-case class PostSpot(title: String, content: String, latitude: Double, longitude: Double)
+case class PostSpot(title: String, content: String, latitude: Double, longitude: Double, postId: Long)
 object PostSpot {
   implicit val jsonWrites = Json.writes[PostSpot]
 
   def apply(spot: Spot, post: Post):PostSpot ={
-    PostSpot(post.title, post.content, spot.latitude, spot.longitude)
+    PostSpot(post.title, post.content, spot.latitude, spot.longitude, post.id.get)
   }
 }

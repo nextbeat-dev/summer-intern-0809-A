@@ -62,6 +62,7 @@ class HomeController @javax.inject.Inject()(
   def search = Action.async { implicit request =>
     formForPostSearch.bindFromRequest.fold(
       errors => {
+        println("error" + errors)
         for {
           postSeq <- daoPost.filterByTitle("天気の子")
           spotSeq <- daoSpot.filterByIds(postSeq.map(_.spotId))
@@ -80,6 +81,7 @@ class HomeController @javax.inject.Inject()(
         }
       },
       form => {
+        println("form" + form)
         for {
           postSeq <- daoPost.filterByTitle(form.query.get)
           spotSeq <- daoSpot.filterByIds(postSeq.map(_.spotId))

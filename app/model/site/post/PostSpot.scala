@@ -45,6 +45,7 @@ case class PostSpotForm
   content: String,                             // 場所の説明
   image:  Option[String],                               // 画像
   address:     String,                             // 住所
+  userId:     Option[User.Id],
   longitude:  Double,                             // 軽度
   latitude: Double,                               // 緯度
   updatedAt: LocalDateTime = LocalDateTime.now,  // データ更新日
@@ -55,7 +56,7 @@ case class PostSpotForm
   }
 
   def toPost(id: Spot.Id) = {
-    Post(None, title, content, image, id, id)
+    Post(None, title, content, image, userId.get, id)
   }
 
 
@@ -75,12 +76,13 @@ object PostSpotForm {
       "content" -> text,
       "image" -> optional(text),
       "address" -> text,
+      "userId" -> optional(longNumber),
       "longitude" -> of(doubleFormat),
       "latitude" -> of(doubleFormat)
     )(
-      (t1, t2, t3, t4, t5, t6) => PostSpotForm(t1, t2, t3, t4, t5, t6)
+      (t1, t2, t3, t4, t5, t6, t7) => PostSpotForm(t1, t2, t3, t4, t5, t6, t7)
     )(PostSpotForm.unapply(_).map(
-      t => (t._1, t._2, t._3, t._4, t._5, t._6)
+      t => (t._1, t._2, t._3, t._4, t._5, t._6, t._7)
     ))
   )
 }

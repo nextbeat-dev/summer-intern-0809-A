@@ -7,7 +7,9 @@ import persistence.post.model.Post
 import model.component.util.ViewValuePageLayout
 import persistence.geo.model.Location
 import persistence.geo.dao.LocationDAO
+import persistence.udb.dao.UserDAO
 import play.api.i18n.I18nSupport
+import mvc.action.AuthenticationAction
 
 import scala.concurrent._
 import persistence.post.dao.PostDAO
@@ -21,6 +23,7 @@ class RegisterController @javax.inject.Inject()(
   val daoLocation: LocationDAO,
   val postDAO: PostDAO,
   val spotDAO: SpotDAO,
+  implicit val daoUser: UserDAO,
   cc: MessagesControllerComponents
   ) extends AbstractController(cc) with I18nSupport {
     implicit lazy val executionContext = defaultExecutionContext
@@ -41,9 +44,9 @@ class RegisterController @javax.inject.Inject()(
   }
 
   /**
-    * 新規ユーザの登録
+    * 新規登録
     */
-  def application = Action.async { implicit request =>
+  def application = (Action andThen AuthenticationAction()).async { implicit request =>
     PostSpotForm.formForPostSpot.bindFromRequest.fold(
       errors => {
         for {
@@ -56,10 +59,11 @@ class RegisterController @javax.inject.Inject()(
           BadRequest(views.html.site.post.register.Main(vv, errors))
         }
       },
-      post   => {
+      postSpot   => {
+        val newForm = postSpot.copy(userId = request.user.id)
         for {
-          id <- spotDAO.add(post.toSpot)
-          _  <- postDAO.add(post.toPost(id))
+          id <- spotDAO.add(newForm.toSpot)
+          _  <- postDAO.add(newForm.toPost(id))
         } yield {
           // TODO: セッション追加処理
           Redirect("/home/")

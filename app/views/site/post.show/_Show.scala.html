@@ -17,15 +17,15 @@
 @** --[ 見出し ]---------------------------------------------------------- *@
 
 <div class="content__column">
-   <div class="content__section photo">
+   <div class="content__section newPhoto" style="height: 300px; width: 300px; margin: 0 auto;">
    @vv.post.image match {
        case Some(image) => {
-            <img src="@vv.post.image">
+            <img src="@vv.post.image" height="300" width="300">
        }
        case None => {
            @views.html.common.component.image.ResponsiveImage(
-           path    = "site/recruit/internship_for_summer_21/03_mentor-kawai.png",
-           alt     = "エンジニア 川井 淳矢",
+           path    = "site/recruit/internship_for_summer_21/noimage.png",
+           alt     = "no image",
            classes = "photo__image")
         }
     }

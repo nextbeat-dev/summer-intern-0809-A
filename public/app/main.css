@@ -398,13 +398,24 @@ h1, h2, h3, h4, h5, h6 {
   box-sizing: border-box; }
 
 
+#site-app-home .content__section.title {
+  text-align: center;
+  font-size: 30px;
+  margin: 20px 0px 10px 0px; }
+
 #site-app-home .content__section.form {
+  text-align: center;
   margin: 10px auto; }
   #site-app-home .content__section.search .form {
     margin-left: 15px;
     font-weight: bold;
     width: 80px;
     height: 30px; }
+    #site-app-home .content__section.form .button {
+        margin: 10px;
+        height: 40px;
+        width: 80px;
+       }
 
 #site-app-home #wrapper {
     position: relative;
@@ -422,6 +433,15 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     bottom: 0;
     right: 0;
+}
+
+#site-app-home #create__spot {
+    text-align: center;
+    margin: 30px;
+}
+#site-app-home #create__spot .button{
+    width: 300px;
+    height: 100px;
 }
 
 #site-app-home .content__section .inline{

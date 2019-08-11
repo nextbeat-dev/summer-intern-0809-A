@@ -32,7 +32,7 @@ class HomeController @javax.inject.Inject()(
 ) extends AbstractController(cc) with I18nSupport {
   implicit lazy val executionContext = defaultExecutionContext
 
-  def view = /*(Action andThen AuthenticationAction())*/Action.async { implicit request =>
+  def view = (Action andThen AuthenticationAction()).async { implicit request =>
 
     /**
      * request.user でログインユーザ情報が取得できる

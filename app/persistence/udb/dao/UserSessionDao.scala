@@ -5,6 +5,8 @@
  * please view the LICENSE file that was distributed with this source code.
  */
 
+/* 使わないでーす */
+
 package persistence.udb.dao
 
 import java.time.LocalDateTime

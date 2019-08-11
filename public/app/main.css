@@ -9,6 +9,7 @@ body {
   position: relative;
   background: white; }
 
+
 #nav-global {
   min-width: 1120px;
   height: 80px;
@@ -47,12 +48,23 @@ body {
   display: table;
   box-sizing: border-box; }
 
+.nav-global-simple .content__inner .link__mypage {
+    height: 80px;
+    margin: 0 auto;
+}
+
+.nav-global-simple .content__inner .link__mypage .text{
+    line-height: 80px;
+    text-align: right;
+}
 .nav-global-simple .content__section {
   display: table-cell;
   vertical-align: middle; }
 
 .nav-global-simple .content__section.logo .logo__image {
   height: 50px; }
+
+
 
 #nav-footer.content {
   position: relative;
@@ -342,6 +354,33 @@ input {
   input:focus {
     box-shadow: inset 0 0 0 2px #6FC9E1; }
 
+  textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+    height: 80px;
+    width: 200px;
+    min-width: 100px;
+    padding: 0 9px;
+    position: relative;
+    font-size: 1rem;
+    border: 0;
+    border-radius: 3px;
+    box-sizing: border-box;
+    outline: none;
+    box-shadow: inset 0 0 0 2px #e0e0e0; }
+    textarea:focus {
+      box-shadow: inset 0 0 0 2px #6FC9E1; }
+
+      #image {
+        height: 20px;
+        width:  250px;
+      }
+
 select {
   -webkit-user-select: auto;
   -moz-user-select: auto;
@@ -384,6 +423,107 @@ h1, h2, h3, h4, h5, h6 {
   color: #303035;
   font-weight: 500;
   box-sizing: border-box; }
+
+
+#site-app-home .content__section.form {
+  margin: 10px auto; }
+  #site-app-home .content__section.search .form {
+    margin-left: 15px;
+    font-weight: bold;
+    width: 80px;
+    height: 30px; }
+
+#site-app-home #wrapper {
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+#site-app-home #wrapper:before {
+    content:"";
+    display: block;
+    padding-top: 75%; /* 高さを幅の75%に固定 */
+}
+#site-app-home #wrapper #map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+#site-app-home .content__section .inline{
+display: inline-block;}
+
+.inner_window_wrapper{
+    width: 300px;
+    background: red;
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.inner_window_wrapper .left {
+    background: #ffffff;
+    padding: 10px;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.inner_window_wrapper .right {
+    background: #ffffff;
+    padding: 10px;
+    width: 50%;
+    box-sizing: border-box;
+    border: medium solid #dddddd;
+}
+
+.inner_window_wrapper .right p{
+    position: absolute;
+}
+
+
+
+
+#site-app-post-show .content__column{
+    width: 800px;
+    margin: auto;
+}
+
+#site-app-post-show .photo{
+  max-width: 50%;
+  text-align: center;
+  margin: 0 auto;
+  }
+
+#site-app-post-show .photo img{
+width: 100%;
+object-fit: contain;
+}
+
+#site-app-post-show .detail{
+padding: 50px 20px;
+text-align: center;
+margin: auto;}
+
+#site-app-post-show .content__section .inline{
+display: inline-block;}
+
+#site-app-post-show #wrapper {
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+#site-app-post-show #wrapper:before {
+    content:"";
+    display: block;
+    padding-top: 75%; /* 高さを幅の75%に固定 */
+}
+#site-app-post-show #wrapper #map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
 
 #site-app-new-user-form.content {
   border: 1px solid #eeeeee; }
@@ -792,3 +932,48 @@ h1, h2, h3, h4, h5, h6 {
       font-style: italic;
       font-family: "Roboto", sans-serif;
       letter-spacing: 3px; }
+
+
+      #mypage .content__section .inline,
+       #site-app-post-show .content__section .inline{
+        display: inline-block; }
+
+      #mypage .content__section.form,
+       #site-app-post-show .content__section.form{
+        margin: 10px auto; }
+        #mypage .content__section.form .button,
+         #site-app-post-show .content__section.form .button{
+          margin-left: 15px;
+          font-weight: bold;
+          width: 80px;
+          height: 30px; }
+
+      #mypage .content__section.content,
+       #site-app-post-show .content__section.content{
+        width: 1024px;
+        margin: auto; }
+        #mypage .content__section.content article,
+         #site-app-post-show .content__section.content article{
+          margin: 0 auto;
+          margin-bottom: 16px;
+          cursor: pointer;
+          background: #fff;
+          border-radius: 4px;
+          box-shadow: 0 1px 2px 0 rgba(199, 199, 199, 0.5);
+          position: relative;
+          width: 650px; }
+          #mypage .content__section.content article .item-panel__wrapper,
+           #site-app-post-show .content__section.content article .item-panel__wrapper{
+            padding: 16px;
+            width: 100%; }
+            #mypage .content__section.content article .item-panel__wrapper .post-item__header,
+             #site-app-post-show .content__section.content article .item-panel__wrapper .comment-item__header{
+              font-weight: bold;
+              font-size: 1.14286rem; }
+            #mypage .content__section.content article .item-panel__wrapper .post-item__content,
+             #site-app-post-show .content__section.content article .item-panel__wrapper .comment-item__content{
+              margin-top: 10px; }
+              #mypage .content__section.content article .item-panel__wrapper .post-item__content label,
+               #site-app-post-show .content__section.content article .item-panel__wrapper .comment-item__content label{
+                font-weight: bold;
+                margin-right: 5px; }

@@ -15,7 +15,6 @@ import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
 
 import persistence.udb.model.User
-import persistence.geo.model.Location
 
 // DAO: ユーザ情報
 //~~~~~~~~~~~~~~~~~~
@@ -41,6 +40,30 @@ class UserDAO @javax.inject.Inject()(
       }
     }
 
+  def get(id: User.Id) =
+    db.run {
+      slick
+        .filter(_.id === id)
+        .result.headOption
+    }
+
+  def findByEmail(email: String) =
+    db.run {
+      slick
+        .filter(_.email === email)
+        .result.headOption
+    }
+
+  /**
+    * ユーザを削除する
+    */
+  def delete(id: User.Id) =
+    db.run {
+      slick
+        .filter(_.id === id)
+        .delete
+    }
+
   // --[ テーブル定義 ] --------------------------------------------------------
   class UserTable(tag: Tag) extends Table[User](tag, "udb_user") {
 
@@ -49,20 +72,18 @@ class UserDAO @javax.inject.Inject()(
     /* @2 */ def nameFirst = column[String]        ("name_first")        // 名前 (姓)
     /* @3 */ def nameLast  = column[String]        ("name_last")         // 名前 (名)
     /* @4 */ def email     = column[String]        ("email")             // メールアドレス
-    /* @5 */ def pref      = column[Location.Id]   ("pref")              // 都道府県
-    /* @6 */ def address   = column[String]        ("address")           // 住所
-    /* @7 */ def updatedAt = column[LocalDateTime] ("updated_at")        // データ更新日
-    /* @8 */ def createdAt = column[LocalDateTime] ("created_at")        // データ作成日
+    /* @5 */ def updatedAt = column[LocalDateTime] ("updated_at")        // データ更新日
+    /* @6 */ def createdAt = column[LocalDateTime] ("created_at")        // データ作成日
 
     // The * projection of the table
     def * = (
-      id.?, nameFirst, nameLast, email, pref, address, updatedAt, createdAt
+      id.?, nameFirst, nameLast, email, updatedAt, createdAt
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
       (User.apply _).tupled,
       /** The bidirectional mappings : Model => Tuple(table) */
       (v: TableElementType) => User.unapply(v).map(_.copy(
-        _7 = LocalDateTime.now
+        _5 = LocalDateTime.now
       ))
     )
   }

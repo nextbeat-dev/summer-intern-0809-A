@@ -2,10 +2,20 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+GET /home/                             controllers.home.HomeController.view
+POST /search/                          controllers.home.HomeController.search
+
 # --[ 登録処理 ]----------------------------------------------------------------
 GET   /app/new-user                     controllers.app.NewUserController.viewForApp
 POST  /app/new-user                     controllers.app.NewUserCommitController.application
+GET   /login                            controllers.app.AuthController.login
+POST  /login                            controllers.app.AuthController.loginCommit
 
+# --[ Post ]---------------------------------------------------------------------
+GET /post/register                     controllers.post.RegisterController.register
+POST /post/register                    controllers.post.RegisterController.application
+GET /post/:id                          controllers.post.PostController.show(id: Long)
+POST /post/comment/:id                    controllers.post.PostController.create(id: Long)
 
 
 # --[ 施設ページ ]----------------------------------------------------------------
@@ -14,6 +24,9 @@ GET  /facility/search                  controllers.facility.FacilityController.s
 
 # --[ 特集ページ ]--------------------------------------------------------------
 GET  /recruit/intership-for-summer-21  controllers.recruit.InternshipForSummer21Controller.view
+
+# --[ mypage ]---------------------
+GET  /mypage       controllers.mypage.MypageController.show
 
 # --[ その他 ]------------------------------------------------------------------
 GET  /assets/*file  controllers.Assets.versioned(path = "/public", file)
